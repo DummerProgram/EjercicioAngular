@@ -11,21 +11,80 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="assets/css/normalize.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
 
   <!--Framework CSS Boostrap 4.5.2-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body ng-controller="">
-  <header>
-
+  <header class="container pt-2">
+    <h1 class="text-center ">CRUD</h1>
   </header>
   <main>
-    <h1>CRUD</h1>
+    <section class="container pt-2">
+      <table class="table table-bordered">
+        <thead>
+          <tr class="table-primary">
+            <th scope="col">Nombre</th>
+            <th scope="col">Email</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>
+              <button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+              <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="container pt-2">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearModal">Crear</button>
+    </section>
   </main>
   <footer>
 
   </footer>
+  <div class="modal fade" id="crearModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Crear Registro</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputName">Nombre</label>
+              <input type="text" class="form-control" id="inputName">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputEmail">Email</label>
+              <input type="email" class="form-control" id="inputEmail">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAddress">Direccion</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+          </div>
+          <button type="submit" class="btn btn-primary">Agregar</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
   <!-- Angular 1.8.2 -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
   <!-- Icons Library Fotawesome-->
@@ -35,7 +94,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!--Files JavaScript-->
-  <script src="../assets/js/settings.js"></script>
+  <script src="assets/js/services.js"></script>
+  <script src="assets/js/controller.js"></script>
 </body>
 
 </html>
