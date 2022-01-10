@@ -1,5 +1,5 @@
 <!Doctype html>
-<html lang="es" ng-app="">
+<html lang="es" ng-app="myApp">
 
 <head>
   <meta charset="utf-8">
@@ -17,74 +17,161 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
-<body ng-controller="">
+<body>
   <header class="container pt-2">
     <h1 class="text-center ">CRUD</h1>
   </header>
   <main>
-    <section class="container pt-2">
-      <table class="table table-bordered">
-        <thead>
-          <tr class="table-primary">
-            <th scope="col">Nombre</th>
-            <th scope="col">Email</th>
-            <th scope="col">Direccion</th>
-            <th scope="col">Opciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>
-              <button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-              <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-    <section class="container pt-2">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearModal">Crear</button>
-    </section>
+    <div class="container pt-2" ng-controller="myController1">
+      <h3 class="text-center">Con toDoList</h3>
+      <!--TABLA-->
+      <div>
+        <section>
+          <table class="table table-bordered">
+            <thead>
+              <tr class="table-primary">
+                <th scope="col">Nombre</th>
+                <th scope="col">Email</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="registro in toDo">
+                <th>
+                  <p>{{registro.nombre}}</p>
+                </th>
+                <td>{{registro.email}}</td>
+                <td>{{registro.direccion}}</td>
+                <td>
+                  <button type="button" class="btn btn-danger" ng-click="removeAct(registro)"><i
+                      class="fas fa-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="container pt-2">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearModal">Crear</button>
+        </section>
+      </div>
+      <!--TABLA-->
+      <!--MODAL-->
+      <div class="modal fade" id="crearModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Crear Registro</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form ng-submit="addAct()">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputName">Nombre</label>
+                    <input type="text" class="form-control" id="inputName" placeholder="Nombre del Usuario"
+                      ng-model="registro.nombre">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="user@service.com"
+                      ng-model="registro.email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputAddress">Direccion</label>
+                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"
+                    ng-model="registro.direccion">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Agregar"></input>
+              </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--MODAL-->
+    </div>
+    <div class="container mt-5" ng-controller="myController2">
+      <h3 class="text-center">Con $resource</h3>
+      <!--TABLA-->
+      <div>
+        <section class="container pt-2 mb-3">
+          <label for="">Crear un nuevo Registo</label>
+          <button type="button" class="btn btn-primary ml-2" data-toggle="modal" data-target="#crearPostModal">Crear</button>
+        </section>
+        <section>
+          <table class="table table-bordered">
+            <thead>
+              <tr class="table-primary">
+                <th scope="col">User ID</th>
+                <th scope="col">ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Body</th>
+                <th scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="registro in posts">
+                <th scope="row">{{registro.userId}}</th>
+                <th scope="row">{{registro.id}}</th>
+                <td>{{registro.title}}</td>
+                <td>{{registro.body}}</td>
+                <td>
+                  <button type="button" class="btn btn-warning m-2" ng-click="removeAct(registro)"><i class="fas fa-edit"></i></button>
+                  <button type="button" class="btn btn-danger m-2" ng-click="deletePost(registro)"><i class="fas fa-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+      <!--TABLA-->
+      <!--MODAL-->
+      <div class="modal fade" id="crearPostModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Crear Registro</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form ng-submit="savePost()">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputName">User ID</label>
+                    <input type="text" class="form-control" id="inputName" placeholder="User ID" ng-model="newRes.userId">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputtitle">Title</label>
+                    <input type="text" class="form-control" id="inputtitle" placeholder="Title" ng-model="newRes.title">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputAddress">Body</label>
+                  <textarea type="text" class="form-control" id="inputAddress" placeholder="Body" ng-model="newRes.body"></textarea>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Agregar">
+              </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--MODAL-->
+    </div>
   </main>
   <footer>
-
   </footer>
-  <div class="modal fade" id="crearModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Crear Registro</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="inputName">Nombre</label>
-              <input type="text" class="form-control" id="inputName">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="inputEmail">Email</label>
-              <input type="email" class="form-control" id="inputEmail">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputAddress">Direccion</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-          </div>
-          <button type="submit" class="btn btn-primary">Agregar</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
   </div>
-</div>
   <!-- Angular 1.8.2 -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
   <!-- Icons Library Fotawesome-->
@@ -94,8 +181,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!--Files JavaScript-->
+  <script src="assets/js/angular-local-storage.min.js"></script>
+  <script src="assets/js/angular-resource.min.js"></script>
   <script src="assets/js/services.js"></script>
-  <script src="assets/js/controller.js"></script>
 </body>
 
 </html>
